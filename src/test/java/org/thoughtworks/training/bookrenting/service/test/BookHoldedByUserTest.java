@@ -33,10 +33,17 @@ public class BookHoldedByUserTest {
 	@After
 	public void tearDown() throws Exception {
 	}
-
-	@Test
-	public void holededBook() {
-		
+	
+	private void testWithNoBook(){
+		List<BookUser> list = new ArrayList<>();
+		List<BookUser> result = bookService.getBooksRentedByUser("user11");
+		for(int i = 0; i < list.size(); i++){
+			assertEquals(list.get(i).getBook(), result.get(i).getBook());
+			assertEquals(list.get(i).getUser(), result.get(i).getUser());
+		}
+	}
+	
+	private void testWithMultiPleBook(){
 		BookUser bookUser1 = new BookUser();
 		BookUser bookUser2 = new BookUser();
 		List<BookUser> list = new ArrayList<>();
@@ -58,5 +65,12 @@ public class BookHoldedByUserTest {
 		}
 		bookService.removeBookfromUser(bookUser1);
 		bookService.removeBookfromUser(bookUser2);
+	}
+
+	@Test
+	public void holededBook() {
+		testWithNoBook();
+		testWithMultiPleBook();
+
 	}
 }

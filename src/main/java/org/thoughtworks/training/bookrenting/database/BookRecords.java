@@ -72,7 +72,6 @@ public class BookRecords {
 			rs = MySqlCon.stmt.executeQuery(query);
 			while(rs.next()){
 				list.add(new PopularBook(rs.getString(1), rs.getInt(2)));	
-				System.out.println(rs.getString(1) + rs.getInt(2));
 			}
 		}catch(SQLException e){
 			e.printStackTrace();

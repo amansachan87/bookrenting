@@ -32,7 +32,7 @@ public class BookReturnedTest {
 	}
 
 	@Test
-	public void popularBook() {
+	public void returnedBook() {
 		
 		BookUser bookUser = new BookUser();
 		bookUser.setUser("user20");

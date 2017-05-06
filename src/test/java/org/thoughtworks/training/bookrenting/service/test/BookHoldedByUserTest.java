@@ -35,7 +35,7 @@ public class BookHoldedByUserTest {
 	}
 
 	@Test
-	public void popularBook() {
+	public void holededBook() {
 		
 		BookUser bookUser1 = new BookUser();
 		BookUser bookUser2 = new BookUser();

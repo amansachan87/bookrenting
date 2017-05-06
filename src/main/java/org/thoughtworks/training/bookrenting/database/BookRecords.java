@@ -75,10 +75,11 @@ public class BookRecords {
 		int count = -1;
 		
 		try{
+			
+			if(bookUser.getBook() == null || bookUser.getUser() == null)
+				return null;
 			query = "select * from library.bookrent where user = " + "'" + user + "'" + " AND " + "book = '" + book + "'";
 			rs = MySqlCon.stmt.executeQuery(query);
-/*			while(rs.next())
-				bUser = new BookUser(rs.getString(1), rs.getString(2), rs.getDate(3));*/
 			if(rs != null){
 				query = "delete from library.bookrent where user = " + "'" + user + "'" + " AND " + "book = '" + book + "'";
 				MySqlCon.stmt.executeUpdate(query);

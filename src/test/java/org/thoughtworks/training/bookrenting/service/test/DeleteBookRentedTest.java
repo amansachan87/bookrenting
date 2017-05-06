@@ -30,6 +30,11 @@ public class DeleteBookRentedTest {
 	@After
 	public void tearDown() throws Exception {
 	}
+	
+	void deleteBook(BookUser result, BookUser bookUser){
+		bookService.assignBooktoUser(bookUser.getUser(), bookUser.getBook());
+		assertEquals(result, bookService.removeBookfromUser(bookUser));
+	}
 
 	@Test
 	public void deleteAddedBook() {
@@ -37,7 +42,9 @@ public class DeleteBookRentedTest {
 		BookUser bookUser = new BookUser();
 		bookUser.setUser("user2");
 		bookUser.setBook("book2");
-		bookService.assignBooktoUser(bookUser.getUser(), bookUser.getBook());
-		assertEquals(bookUser, bookService.removeBookfromUser(bookUser));
+		deleteBook(bookUser, bookUser);
+		
+		bookUser = new BookUser();
+		deleteBook(null, bookUser);
 	}	
 }

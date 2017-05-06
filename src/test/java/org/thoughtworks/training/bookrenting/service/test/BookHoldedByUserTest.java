@@ -34,20 +34,31 @@ public class BookHoldedByUserTest {
 	public void tearDown() throws Exception {
 	}
 	
-	private void testWithNoBook(){
-		List<BookUser> list = new ArrayList<>();
-		List<BookUser> result = bookService.getBooksRentedByUser("user11");
+	private void testWithNoBook(List<BookUser> list, String userName){
+		List<BookUser> result = bookService.getBooksRentedByUser(userName);
 		for(int i = 0; i < list.size(); i++){
 			assertEquals(list.get(i).getBook(), result.get(i).getBook());
 			assertEquals(list.get(i).getUser(), result.get(i).getUser());
 		}
 	}
 	
-	private void testWithMultiPleBook(){
+	private void testWithMultiPleBook(List<BookUser> list, String userName){
+		
+		List<BookUser> result = bookService.getBooksRentedByUser(userName);
+		
+		for(int i = 0; i < list.size(); i++){
+			assertEquals(list.get(i).getBook(), result.get(i).getBook());
+			assertEquals(list.get(i).getUser(), result.get(i).getUser());
+		}
+	}
+
+	@Test
+	public void holededBook() {
+		List<BookUser> list = new ArrayList<>();
+		testWithNoBook(list, "user11");
+		
 		BookUser bookUser1 = new BookUser();
 		BookUser bookUser2 = new BookUser();
-		List<BookUser> list = new ArrayList<>();
-		List<BookUser> result = new ArrayList<>();
 		bookUser1.setUser("user11");
 		bookUser1.setBook("book11");
 		bookUser2.setUser("user11");
@@ -57,19 +68,8 @@ public class BookHoldedByUserTest {
 		list.add(new BookUser("user11", "book11"));
 		list.add(new BookUser("user11", "book12"));
 		
-		result = bookService.getBooksRentedByUser("user11");
-		
-		for(int i = 0; i < list.size(); i++){
-			assertEquals(list.get(i).getBook(), result.get(i).getBook());
-			assertEquals(list.get(i).getUser(), result.get(i).getUser());
-		}
+		testWithMultiPleBook(list, "user11");
 		bookService.removeBookfromUser(bookUser1.getUser(), bookUser1.getBook());
 		bookService.removeBookfromUser(bookUser2.getUser(), bookUser2.getBook());
-	}
-
-	@Test
-	public void holededBook() {
-		testWithNoBook();
-		testWithMultiPleBook();
 	}
 }

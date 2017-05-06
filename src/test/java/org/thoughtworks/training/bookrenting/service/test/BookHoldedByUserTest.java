@@ -11,10 +11,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.thoughtworks.training.bookrenting.model.BookUser;
-import org.thoughtworks.training.bookrenting.model.PopularBook;
 import org.thoughtworks.training.bookrenting.service.BookService;
 
-public class PopularBookTest {
+public class BookHoldedByUserTest {
 	
 	final BookService bookService = new BookService();
 
@@ -40,20 +39,22 @@ public class PopularBookTest {
 		
 		BookUser bookUser1 = new BookUser();
 		BookUser bookUser2 = new BookUser();
-		List<PopularBook> list = new ArrayList<>();
-		List<PopularBook> result = new ArrayList<>();
+		List<BookUser> list = new ArrayList<>();
+		List<BookUser> result = new ArrayList<>();
 		bookUser1.setUser("user11");
 		bookUser1.setBook("book11");
-		bookUser2.setUser("user12");
-		bookUser2.setBook("book11");
+		bookUser2.setUser("user11");
+		bookUser2.setBook("book12");
 		bookService.assignBooktoUser(bookUser1.getUser(), bookUser1.getBook());
 		bookService.assignBooktoUser(bookUser2.getUser(), bookUser2.getBook());
-		list.add(new PopularBook("book11", 2));
+		list.add(new BookUser("user11", "book11"));
+		list.add(new BookUser("user11", "book12"));
 		
-		result = bookService.getPopularBooks();
+		result = bookService.getBooksRentedByUser("user11");
+		
 		for(int i = 0; i < list.size(); i++){
 			assertEquals(list.get(i).getBook(), result.get(i).getBook());
-			assertEquals(list.get(i).getCount(), result.get(i).getCount());
+			assertEquals(list.get(i).getUser(), result.get(i).getUser());
 		}
 		bookService.removeBookfromUser(bookUser1);
 		bookService.removeBookfromUser(bookUser2);

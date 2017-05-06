@@ -34,6 +34,6 @@ public class BookService {
 	
 	public BookUser removeBookfromUser(BookUser bookUser){
 		
-		return bookRecords.removeBook(bookUser);
+		 return bookRecords.removeBook(bookUser);
 	}
 }

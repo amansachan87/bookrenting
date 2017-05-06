@@ -37,7 +37,7 @@ public class BookRecords {
 			java.sql.Date sqlDate = new java.sql.Date(dateIssue.getTime());
 			String query = "insert into library.bookrent (user, book, dateissue) values ("+"'" + userName + "'"+ "," + "'" + bookName + "'"+ "," + "'" + sqlDate + "'"+ ")";
 			MySqlCon.stmt.executeUpdate(query);
-			query = "select * from library.bookrent where user = " + "'" + bookUser.getUser() + "'" + "AND " + "book = " + "'" + bookUser.getBook() + "'";;
+			query = "select * from library.bookrent where user = " + "'" + bookUser.getUser() + "'" + "AND " + "book = " + "'" + bookUser.getBook() + "'";
 			rs = MySqlCon.stmt.executeQuery(query);
 			while(rs.next()){
 				bookuser.setBook(rs.getString(1));
@@ -69,20 +69,24 @@ public class BookRecords {
 	
 	public BookUser removeBook(BookUser bookUser){
 		ResultSet rs = null;
-		BookUser bUser = null;
 		String user = bookUser.getUser();
 		String book = bookUser.getBook();
+		String query;
+		int count = -1;
 		
 		try{
-			String query = "select * from library.bookrent where user = " + "'" + user + "'" + " AND " + "book = '" + book + "'";
+			query = "select * from library.bookrent where user = " + "'" + user + "'" + " AND " + "book = '" + book + "'";
 			rs = MySqlCon.stmt.executeQuery(query);
-			while(rs.next())
-				bUser = new BookUser(rs.getString(1), rs.getString(2), rs.getDate(3));
-			query = "delete from library.bookrent where user = " + "'" + user + "'" + " AND " + "book = '" + book + "'";
-			MySqlCon.stmt.executeUpdate(query);
+/*			while(rs.next())
+				bUser = new BookUser(rs.getString(1), rs.getString(2), rs.getDate(3));*/
+			if(rs != null){
+				query = "delete from library.bookrent where user = " + "'" + user + "'" + " AND " + "book = '" + book + "'";
+				MySqlCon.stmt.executeUpdate(query);
+				return bookUser;
+			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		return bUser;
+		return null;
 	}
 }

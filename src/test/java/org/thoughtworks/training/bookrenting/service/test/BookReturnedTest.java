@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.thoughtworks.training.bookrenting.model.BookUser;
 import org.thoughtworks.training.bookrenting.service.BookService;
 
-public class BookRentingServiceTest {
+public class BookReturnedTest {
 	
 	final BookService bookService = new BookService();
 
@@ -32,15 +32,19 @@ public class BookRentingServiceTest {
 	}
 
 	@Test
-	public void testAddBook() {
+	public void popularBook() {
 		
 		BookUser bookUser = new BookUser();
-		bookUser.setUser("user1");
-		bookUser.setBook("book1");
-		BookUser result = bookService.assignBooktoUser("user1", "book1");
-		
-		assertEquals("book1", result.getBook());
-		assertEquals("user1", result.getUser());
+		bookUser.setUser("user20");
+		bookUser.setBook("book20");
+
+		bookService.assignBooktoUser(bookUser.getUser(), bookUser.getBook());
+				
+		BookUser result = bookService.returnBookfromUser(bookUser);
+		assertEquals(result.getBook(), bookUser.getBook());
+		assertEquals(result.getUser(), bookUser.getUser());
+
 		bookService.removeBookfromUser(bookUser);
 	}
 }
+

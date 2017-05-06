@@ -6,6 +6,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -47,8 +48,19 @@ public class BookResource {
 		return bookService.getPopularBooks();
 	}
 	
+	@PUT
+	public BookUser returnBook(@QueryParam ("user") String userName,
+								@QueryParam ("book") String bookName){
+		
+		BookUser bookUser = new BookUser();
+		bookUser.setUser(userName);
+		bookUser.setBook(bookName);
+		
+		return bookService.returnBookfromUser(bookUser);
+	}
+	
 	@DELETE
-	public BookUser deleteBook(@QueryParam ("user") String userName,
+	public BookUser removeBook(@QueryParam ("user") String userName,
 								@QueryParam ("book") String bookName){
 		
 		BookUser bookUser = new BookUser();

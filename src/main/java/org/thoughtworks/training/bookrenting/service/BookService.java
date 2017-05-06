@@ -38,6 +38,13 @@ public class BookService {
 		return bookRecords.getMostPoularBooks();
 	}
 	
+	public BookUser returnBookfromUser(BookUser bookUser){
+		if(bookUser.getUser() != null || bookUser.getBook() != null)
+			return bookRecords.returnBook(bookUser);
+		
+		return null;
+	}
+	
 	public BookUser removeBookfromUser(BookUser bookUser){
 		if(bookUser.getUser() != null || bookUser.getBook() != null)
 			return bookRecords.removeBook(bookUser);

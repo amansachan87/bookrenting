@@ -29,13 +29,27 @@ public class BookRecords {
 	public BookUser assignBook(BookUser bookUser){
 		BookUser bookuser = new BookUser();
 		ResultSet rs = null;
+		String query;
+		int count = 0;
 		
 		try {
 			String userName = bookUser.getUser();
 			String bookName = bookUser.getBook();
 			Date dateIssue = new Date();
 			java.sql.Date sqlDate = new java.sql.Date(dateIssue.getTime());
-			String query = "insert into library.bookrent (user, book, dateissue) values ("+"'" + userName + "'"+ "," + "'" + bookName + "'"+ "," + "'" + sqlDate + "'"+ ")";
+			
+			query = "select * from library.bookrent where user = " + "'" + bookUser.getUser() + "'" + " AND " + "book = '" + bookUser.getBook() + "'";
+			rs = MySqlCon.stmt.executeQuery(query);
+			
+			while(rs.next()){
+				count++;
+			}
+			
+			if(count != 0){
+				return null;
+			}
+			
+			query = "insert into library.bookrent (user, book, dateissue) values ("+"'" + userName + "'"+ "," + "'" + bookName + "'"+ "," + "'" + sqlDate + "'"+ ")";
 			MySqlCon.stmt.executeUpdate(query);
 			query = "select * from library.bookrent where user = " + "'" + bookUser.getUser() + "'" + "AND " + "book = " + "'" + bookUser.getBook() + "'";
 			rs = MySqlCon.stmt.executeQuery(query);
@@ -65,6 +79,29 @@ public class BookRecords {
 		}	
 		
 		return list;
+	}
+	
+	public BookUser returnBook(BookUser bookUser){
+		ResultSet rs = null;
+		String user = bookUser.getUser();
+		String book = bookUser.getBook();
+		String query;
+		
+		try{
+			Date dateReturn = new Date();
+			java.sql.Date sqlDate = new java.sql.Date(dateReturn.getTime());
+			
+			query = "select * from library.bookrent where user = " + "'" + user + "'" + " AND " + "book = '" + book + "'";
+			rs = MySqlCon.stmt.executeQuery(query);
+			if(rs != null){
+				query = "update library.bookrent " + "set datereturn = " + "'" + sqlDate + "'" + " where user = " + "'" + user + "'" + " AND " + "book = '" + book + "'";
+				MySqlCon.stmt.executeUpdate(query);
+				return bookUser;
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public BookUser removeBook(BookUser bookUser){

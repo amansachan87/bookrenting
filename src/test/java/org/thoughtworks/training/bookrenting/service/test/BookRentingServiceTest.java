@@ -30,17 +30,38 @@ public class BookRentingServiceTest {
 	@After
 	public void tearDown() throws Exception {
 	}
+	
+	private void addBook(BookUser bookUser){
 
-	@Test
-	public void testAddBook() {
-		
-		BookUser bookUser = new BookUser();
-		bookUser.setUser("user1");
-		bookUser.setBook("book1");
-		BookUser result = bookService.assignBooktoUser("user1", "book1");
-		
+		BookUser result = bookService.assignBooktoUser(bookUser.getUser(), bookUser.getBook());	
 		assertEquals("book1", result.getBook());
 		assertEquals("user1", result.getUser());
 		bookService.removeBookfromUser(bookUser);
+	}
+	
+	private void addBookForNull(BookUser bookUser){
+
+		BookUser result = bookService.assignBooktoUser(bookUser.getUser(), bookUser.getBook());	
+		assertEquals(null, result);
+	}
+	
+	@Test
+	public void testAddBook() {
+		BookUser bookUser = new BookUser();
+		bookUser.setUser("user1");
+		bookUser.setBook("book1");		
+		addBook(bookUser);
+		
+		bookUser.setUser("user1");
+		bookUser.setBook(null);
+		addBookForNull(bookUser);
+		
+		bookUser.setUser(null);
+		bookUser.setBook("book1");
+		addBookForNull(bookUser);
+		
+		bookUser.setUser(null);
+		bookUser.setBook(null);
+		addBookForNull(bookUser);
 	}
 }

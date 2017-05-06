@@ -28,7 +28,7 @@ public class BookService {
 		bookUser.setUser(user);	
 		bookUser.setBook(book);	
 		
-		if(user != null || book != null)		
+		if(user != null && book != null)		
 			return bookRecords.assignBook(bookUser);
 		
 		return null;
@@ -39,14 +39,14 @@ public class BookService {
 	}
 	
 	public BookUser returnBookfromUser(BookUser bookUser){
-		if(bookUser.getUser() != null || bookUser.getBook() != null)
+		if(bookUser.getUser() != null && bookUser.getBook() != null)
 			return bookRecords.returnBook(bookUser);
 		
 		return null;
 	}
 	
 	public BookUser removeBookfromUser(BookUser bookUser){
-		if(bookUser.getUser() != null || bookUser.getBook() != null)
+		if(bookUser.getUser() != null && bookUser.getBook() != null)
 			return bookRecords.removeBook(bookUser);
 		
 		return null;

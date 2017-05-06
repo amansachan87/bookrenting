@@ -30,21 +30,42 @@ public class BookReturnedTest {
 	@After
 	public void tearDown() throws Exception {
 	}
+	
+	private void bookReturned(BookUser bookUser){
 
-	@Test
-	public void returnedBook() {
-		
-		BookUser bookUser = new BookUser();
-		bookUser.setUser("user20");
-		bookUser.setBook("book20");
-
-		bookService.assignBooktoUser(bookUser.getUser(), bookUser.getBook());
-				
+		bookService.assignBooktoUser(bookUser.getUser(), bookUser.getBook());				
 		BookUser result = bookService.returnBookfromUser(bookUser);
 		assertEquals(result.getBook(), bookUser.getBook());
 		assertEquals(result.getUser(), bookUser.getUser());
 
 		bookService.removeBookfromUser(bookUser);
+	}
+	
+	private void bookReturnedNull(BookUser bookUser){
+
+		bookService.assignBooktoUser(bookUser.getUser(), bookUser.getBook());				
+		BookUser result = bookService.returnBookfromUser(bookUser);
+		assertEquals(null, result);
+	}
+
+	@Test
+	public void returnedBook() {
+		BookUser bookUser = new BookUser();
+		bookUser.setUser("user20");
+		bookUser.setBook("book20");
+		bookReturned(bookUser);
+		
+		bookUser.setUser("user20");
+		bookUser.setBook(null);
+		bookReturnedNull(bookUser);
+		
+		bookUser.setUser(null);
+		bookUser.setBook("book20");
+		bookReturnedNull(bookUser);
+		
+		bookUser.setUser(null);
+		bookUser.setBook(null);
+		bookReturnedNull(bookUser);
 	}
 }
 

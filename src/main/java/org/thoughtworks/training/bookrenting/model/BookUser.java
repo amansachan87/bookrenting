@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Aman Sachan
- * Model for book user/renter
+ * Model for book user
  */
 
 @XmlRootElement

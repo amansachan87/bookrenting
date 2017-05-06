@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
+/**
+ * @author Aman Sachan
+ * Create Statement Object to Use for multiple queries
+ *
+ */
 public class MySqlCon {
 	
 	public static Statement stmt = createDBStatement();

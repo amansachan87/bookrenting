@@ -9,8 +9,18 @@ import java.util.List;
 import org.thoughtworks.training.bookrenting.model.BookUser;
 import org.thoughtworks.training.bookrenting.model.PopularBook;
 
+/**
+ * @author Aman Sachan
+ * Class for database query support
+ *
+ */
 public class BookRecords {
 	
+	/**
+	 * Function: Provides all the books rented by particular User
+	 * @param user
+	 * @return list of books
+	 */
 	public List<BookUser> getBooksRentedByUser(String user){
 		ResultSet rs = null;
 		List<BookUser> list = new ArrayList<>();
@@ -26,6 +36,11 @@ public class BookRecords {
 		return list;
 	}
 	
+	/**
+	 * Function: To Assign book to User
+	 * @param bookUser
+	 * @return BookUser
+	 */
 	public BookUser assignBook(BookUser bookUser){
 		BookUser bookuser = new BookUser();
 		ResultSet rs = null;
@@ -63,6 +78,10 @@ public class BookRecords {
 		return bookUser;
 	}
 	
+	/**
+	 * Function: Provides most popular book in library based on rented count
+	 * @return List of books
+	 */
 	public List<PopularBook> getMostPoularBooks(){
 		ResultSet rs = null;
 		List<PopularBook> list = new ArrayList<>();
@@ -80,6 +99,11 @@ public class BookRecords {
 		return list;
 	}
 	
+	/**
+	 * Function: Update return date in database
+	 * @param bookUser
+	 * @return BookUser
+	 */
 	public BookUser returnBook(BookUser bookUser){
 		ResultSet rs = null;
 		String user = bookUser.getUser();
@@ -103,6 +127,11 @@ public class BookRecords {
 		return null;
 	}
 	
+	/**
+	 * Function: Remove book from User
+	 * @param bookUser
+	 * @return BookUser
+	 */
 	public BookUser removeBook(BookUser bookUser){
 		ResultSet rs = null;
 		String user = bookUser.getUser();

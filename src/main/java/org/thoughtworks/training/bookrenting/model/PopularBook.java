@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Aman Sachan
- *
+ * Model for popular books in library
  */
 @XmlRootElement
 public class PopularBook {

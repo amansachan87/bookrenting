@@ -27,6 +27,8 @@ public class BookRecords {
 	}
 	
 	public BookUser assignBook(BookUser bookUser){
+		BookUser bookuser = new BookUser();
+		ResultSet rs = null;
 		
 		try {
 			String userName = bookUser.getUser();
@@ -35,6 +37,12 @@ public class BookRecords {
 			java.sql.Date sqlDate = new java.sql.Date(dateIssue.getTime());
 			String query = "insert into library.bookrent (user, book, dateissue) values ("+"'" + userName + "'"+ "," + "'" + bookName + "'"+ "," + "'" + sqlDate + "'"+ ")";
 			MySqlCon.stmt.executeUpdate(query);
+			query = "select * from library.bookrent where user = " + "'" + bookUser.getUser() + "'" + "AND " + "book = " + "'" + bookUser.getBook() + "'";;
+			rs = MySqlCon.stmt.executeQuery(query);
+			while(rs.next()){
+				bookuser.setBook(rs.getString(1));
+				bookuser.setBook(rs.getString(2));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

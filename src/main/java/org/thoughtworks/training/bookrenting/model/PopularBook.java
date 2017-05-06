@@ -11,6 +11,8 @@ public class PopularBook {
 	String book;
 	int count;
 	
+	PopularBook(){}
+	
 	public PopularBook(String book, int count) {
 		super();
 		this.book = book;

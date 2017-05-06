@@ -20,10 +20,10 @@ public class BookService {
 	 * @param user
 	 * @return
 	 */
-	public List<BookUser> getBooksRentedByUser(String user){
+	public List<BookUser> getBooksRentedByUser(String userName){
 		
-		if(user != null)
-			return bookRecords.getBooksRentedByUser(user);
+		if(!userName.equals(""))
+			return bookRecords.getBooksRentedByUser(userName);
 		
 		return null;
 	}
@@ -34,12 +34,12 @@ public class BookService {
 	 * @param book
 	 * @return BookUser
 	 */
-	public BookUser assignBooktoUser(String user, String book){
+	public BookUser assignBooktoUser(String userName, String bookName){
 		BookUser bookUser = new BookUser();
-		bookUser.setUser(user);	
-		bookUser.setBook(book);	
+		bookUser.setUser(userName);	
+		bookUser.setBook(bookName);	
 		
-		if(user != null && book != null)		
+		if(!userName.equals("") && !bookName.equals(""))		
 			return bookRecords.assignBook(bookUser);
 		
 		return null;
@@ -58,8 +58,12 @@ public class BookService {
 	 * @param bookUser
 	 * @return BookUser
 	 */
-	public BookUser returnBookfromUser(BookUser bookUser){
-		if(bookUser.getUser() != null && bookUser.getBook() != null)
+	public BookUser returnBookfromUser(String userName, String bookName){
+		BookUser bookUser = new BookUser();
+		bookUser.setUser(userName);
+		bookUser.setBook(bookName);
+		
+		if(!userName.equals("") && !bookName.equals(""))
 			return bookRecords.returnBook(bookUser);
 		
 		return null;
@@ -70,8 +74,12 @@ public class BookService {
 	 * @param bookUser
 	 * @return BookUser
 	 */
-	public BookUser removeBookfromUser(BookUser bookUser){
-		if(bookUser.getUser() != null && bookUser.getBook() != null)
+	public BookUser removeBookfromUser(String userName, String bookName){
+		BookUser bookUser = new BookUser();
+		bookUser.setUser(userName);
+		bookUser.setBook(bookName);
+		
+		if(!userName.equals("") && !bookName.equals(""))
 			return bookRecords.removeBook(bookUser);
 		
 		return null;

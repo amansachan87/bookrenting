@@ -36,7 +36,7 @@ public class BookRentingServiceTest {
 		BookUser result = bookService.assignBooktoUser(bookUser.getUser(), bookUser.getBook());	
 		assertEquals("book1", result.getBook());
 		assertEquals("user1", result.getUser());
-		bookService.removeBookfromUser(bookUser);
+		bookService.removeBookfromUser(bookUser.getUser(), bookUser.getBook());
 	}
 	
 	private void addBookForNull(BookUser bookUser){
@@ -53,15 +53,15 @@ public class BookRentingServiceTest {
 		addBook(bookUser);
 		
 		bookUser.setUser("user1");
-		bookUser.setBook(null);
+		bookUser.setBook("");
 		addBookForNull(bookUser);
 		
-		bookUser.setUser(null);
+		bookUser.setUser("");
 		bookUser.setBook("book1");
 		addBookForNull(bookUser);
 		
-		bookUser.setUser(null);
-		bookUser.setBook(null);
+		bookUser.setUser("");
+		bookUser.setBook("");
 		addBookForNull(bookUser);
 	}
 }

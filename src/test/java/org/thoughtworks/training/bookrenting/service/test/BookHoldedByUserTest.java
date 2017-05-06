@@ -63,14 +63,13 @@ public class BookHoldedByUserTest {
 			assertEquals(list.get(i).getBook(), result.get(i).getBook());
 			assertEquals(list.get(i).getUser(), result.get(i).getUser());
 		}
-		bookService.removeBookfromUser(bookUser1);
-		bookService.removeBookfromUser(bookUser2);
+		bookService.removeBookfromUser(bookUser1.getUser(), bookUser1.getBook());
+		bookService.removeBookfromUser(bookUser2.getUser(), bookUser1.getBook());
 	}
 
 	@Test
 	public void holededBook() {
 		testWithNoBook();
 		testWithMultiPleBook();
-
 	}
 }

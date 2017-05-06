@@ -34,17 +34,17 @@ public class BookReturnedTest {
 	private void bookReturned(BookUser bookUser){
 
 		bookService.assignBooktoUser(bookUser.getUser(), bookUser.getBook());				
-		BookUser result = bookService.returnBookfromUser(bookUser);
+		BookUser result = bookService.returnBookfromUser(bookUser.getUser(), bookUser.getBook());
 		assertEquals(result.getBook(), bookUser.getBook());
 		assertEquals(result.getUser(), bookUser.getUser());
 
-		bookService.removeBookfromUser(bookUser);
+		bookService.removeBookfromUser(bookUser.getUser(), bookUser.getBook());
 	}
 	
 	private void bookReturnedNull(BookUser bookUser){
 
 		bookService.assignBooktoUser(bookUser.getUser(), bookUser.getBook());				
-		BookUser result = bookService.returnBookfromUser(bookUser);
+		BookUser result = bookService.returnBookfromUser(bookUser.getUser(), bookUser.getBook());
 		assertEquals(null, result);
 	}
 
@@ -56,15 +56,15 @@ public class BookReturnedTest {
 		bookReturned(bookUser);
 		
 		bookUser.setUser("user20");
-		bookUser.setBook(null);
+		bookUser.setBook("");
 		bookReturnedNull(bookUser);
 		
-		bookUser.setUser(null);
+		bookUser.setUser("");
 		bookUser.setBook("book20");
 		bookReturnedNull(bookUser);
 		
-		bookUser.setUser(null);
-		bookUser.setBook(null);
+		bookUser.setUser("");
+		bookUser.setBook("");
 		bookReturnedNull(bookUser);
 	}
 }

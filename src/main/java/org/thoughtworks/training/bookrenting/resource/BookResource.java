@@ -72,12 +72,8 @@ public class BookResource {
 	@PUT
 	public BookUser returnBook(@QueryParam ("user") String userName,
 								@QueryParam ("book") String bookName){
-		
-		BookUser bookUser = new BookUser();
-		bookUser.setUser(userName);
-		bookUser.setBook(bookName);
-		
-		return bookService.returnBookfromUser(bookUser);
+				
+		return bookService.returnBookfromUser(userName, bookName);
 	}
 	
 	/**
@@ -90,10 +86,6 @@ public class BookResource {
 	public BookUser removeBook(@QueryParam ("user") String userName,
 								@QueryParam ("book") String bookName){
 		
-		BookUser bookUser = new BookUser();
-		bookUser.setUser(userName);
-		bookUser.setBook(bookName);
-		
-		return bookService.removeBookfromUser(bookUser);
+		return bookService.removeBookfromUser(userName, bookName);
 	}
 }

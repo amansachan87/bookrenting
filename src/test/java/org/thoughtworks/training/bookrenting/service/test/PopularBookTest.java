@@ -55,7 +55,7 @@ public class PopularBookTest {
 			assertEquals(list.get(i).getBook(), result.get(i).getBook());
 			assertEquals(list.get(i).getCount(), result.get(i).getCount());
 		}
-		bookService.removeBookfromUser(bookUser1);
-		bookService.removeBookfromUser(bookUser2);
+		bookService.removeBookfromUser(bookUser1.getUser(), bookUser1.getBook());
+		bookService.removeBookfromUser(bookUser2.getUser(), bookUser2.getBook());
 	}
 }

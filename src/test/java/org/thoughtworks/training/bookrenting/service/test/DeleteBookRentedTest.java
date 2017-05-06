@@ -33,15 +33,15 @@ public class DeleteBookRentedTest {
 	
 	void deleteBook(BookUser bookUser){
 		bookService.assignBooktoUser(bookUser.getUser(), bookUser.getBook());
-		BookUser result = bookService.removeBookfromUser(bookUser);
+		BookUser result = bookService.removeBookfromUser(bookUser.getUser(), bookUser.getBook());
 		assertEquals("user2", result.getUser());
 		assertEquals("book2", result.getBook());
-		bookService.removeBookfromUser(bookUser);
+		bookService.removeBookfromUser(bookUser.getUser(), bookUser.getBook());
 	}
 	
 	void deleteBookNull(BookUser bookUser){
 		bookService.assignBooktoUser(bookUser.getUser(), bookUser.getBook());
-		BookUser result = bookService.removeBookfromUser(bookUser);
+		BookUser result = bookService.removeBookfromUser(bookUser.getUser(), bookUser.getBook());
 		assertEquals(null, result);
 	}
 
@@ -54,15 +54,15 @@ public class DeleteBookRentedTest {
 		deleteBook(bookUser);
 		
 		bookUser.setUser("user2");
-		bookUser.setBook(null);
+		bookUser.setBook("");
 		deleteBookNull(bookUser);
 		
-		bookUser.setUser(null);
+		bookUser.setUser("");
 		bookUser.setBook("book2");
 		deleteBookNull(bookUser);
 		
-		bookUser.setUser(null);
-		bookUser.setBook(null);
+		bookUser.setUser("");
+		bookUser.setBook("");
 		deleteBookNull(bookUser);
 		
 	}	

@@ -31,10 +31,18 @@ public class DeleteBookRentedTest {
 	public void tearDown() throws Exception {
 	}
 	
-	void deleteBook(BookUser result, BookUser bookUser){
+	void deleteBook(BookUser bookUser){
 		bookService.assignBooktoUser(bookUser.getUser(), bookUser.getBook());
-		assertEquals(result, bookService.removeBookfromUser(bookUser));
+		BookUser result = bookService.removeBookfromUser(bookUser);
+		assertEquals("user2", result.getUser());
+		assertEquals("book2", result.getBook());
 		bookService.removeBookfromUser(bookUser);
+	}
+	
+	void deleteBookNull(BookUser bookUser){
+		bookService.assignBooktoUser(bookUser.getUser(), bookUser.getBook());
+		BookUser result = bookService.removeBookfromUser(bookUser);
+		assertEquals(null, result);
 	}
 
 	@Test
@@ -43,9 +51,19 @@ public class DeleteBookRentedTest {
 		BookUser bookUser = new BookUser();
 		bookUser.setUser("user2");
 		bookUser.setBook("book2");
-		deleteBook(bookUser, bookUser);
+		deleteBook(bookUser);
 		
-		bookUser = new BookUser();
-		deleteBook(null, bookUser);
+		bookUser.setUser("user2");
+		bookUser.setBook(null);
+		deleteBookNull(bookUser);
+		
+		bookUser.setUser(null);
+		bookUser.setBook("book2");
+		deleteBookNull(bookUser);
+		
+		bookUser.setUser(null);
+		bookUser.setBook(null);
+		deleteBookNull(bookUser);
+		
 	}	
 }

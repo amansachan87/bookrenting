@@ -56,11 +56,7 @@ public class BookRecords {
 			query = "select * from library.bookrent where user = " + "'" + bookUser.getUser() + "'" + " AND " + "book = '" + bookUser.getBook() + "'";
 			rs = MySqlCon.stmt.executeQuery(query);
 			
-			while(rs.next()){
-				count++;
-			}
-			
-			if(count != 0){
+			if(rs.next() == true && rs.getDate(4) == null){
 				return null;
 			}
 			

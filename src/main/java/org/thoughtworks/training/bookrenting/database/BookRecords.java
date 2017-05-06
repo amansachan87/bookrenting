@@ -72,12 +72,8 @@ public class BookRecords {
 		String user = bookUser.getUser();
 		String book = bookUser.getBook();
 		String query;
-		int count = -1;
 		
 		try{
-			
-			if(bookUser.getBook() == null || bookUser.getUser() == null)
-				return null;
 			query = "select * from library.bookrent where user = " + "'" + user + "'" + " AND " + "book = '" + book + "'";
 			rs = MySqlCon.stmt.executeQuery(query);
 			if(rs != null){

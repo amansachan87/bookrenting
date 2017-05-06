@@ -39,5 +39,6 @@ public class BookRentingServiceTest {
 		bookUser.setBook("book1");
 		assertEquals("book1", bookService.assignBooktoUser("user1", "book1").getBook());
 		assertEquals("user1", bookService.assignBooktoUser("user1", "book1").getUser());
+		bookService.removeBookfromUser(bookUser);
 	}
 }

@@ -34,6 +34,7 @@ public class DeleteBookRentedTest {
 	void deleteBook(BookUser result, BookUser bookUser){
 		bookService.assignBooktoUser(bookUser.getUser(), bookUser.getBook());
 		assertEquals(result, bookService.removeBookfromUser(bookUser));
+		bookService.removeBookfromUser(bookUser);
 	}
 
 	@Test

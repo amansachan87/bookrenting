@@ -17,15 +17,21 @@ public class BookService {
 
 	public List<BookUser> getBooksRentedByUser(String user){
 		
-		return bookRecords.getBooksRentedByUser(user);
+		if(user != null)
+			return bookRecords.getBooksRentedByUser(user);
+		
+		return null;
 	}
 	
 	public BookUser assignBooktoUser(String user, String book){
 		BookUser bookUser = new BookUser();
 		bookUser.setUser(user);	
-		bookUser.setBook(book);		
+		bookUser.setBook(book);	
 		
-		return bookRecords.assignBook(bookUser);
+		if(user != null || book != null)		
+			return bookRecords.assignBook(bookUser);
+		
+		return null;
 	}
 	
 	public List<PopularBook> getPopularBooks(){
@@ -33,7 +39,9 @@ public class BookService {
 	}
 	
 	public BookUser removeBookfromUser(BookUser bookUser){
+		if(bookUser.getUser() != null || bookUser.getBook() != null)
+			return bookRecords.removeBook(bookUser);
 		
-		 return bookRecords.removeBook(bookUser);
+		return null;
 	}
 }

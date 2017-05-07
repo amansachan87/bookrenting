@@ -50,7 +50,10 @@ public class BookService {
 	 * @return List of books
 	 */
 	public List<PopularBook> getPopularBooks(int num){
-		return bookRecords.getMostPoularBooks(num);
+		if(num > 0)
+			return bookRecords.getMostPoularBooks(num);
+		
+		return null;
 	}
 	
 	/**

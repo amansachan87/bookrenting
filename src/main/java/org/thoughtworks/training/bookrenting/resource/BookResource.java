@@ -59,8 +59,9 @@ public class BookResource {
 	 */
 	@GET
 	@Path("/popular")
-	public List<PopularBook> popularBook(){
-		return bookService.getPopularBooks();
+	public List<PopularBook> popularBook(@QueryParam ("min") String num){
+		int result = Integer.parseInt(num);
+		return bookService.getPopularBooks(result);
 	}
 	
 	/**

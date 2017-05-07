@@ -45,7 +45,6 @@ public class BookRecords {
 		BookUser bookuser = new BookUser();
 		ResultSet rs = null;
 		String query;
-		int count = 0;
 		
 		try {
 			String userName = bookUser.getUser();
@@ -78,12 +77,12 @@ public class BookRecords {
 	 * Function: Provides most popular book in library based on rented count
 	 * @return List of books
 	 */
-	public List<PopularBook> getMostPoularBooks(){
+	public List<PopularBook> getMostPoularBooks(int num){
 		ResultSet rs = null;
 		List<PopularBook> list = new ArrayList<>();
-		
+
 		try{
-			String query = "select book, count(book) as count from library.bookrent GROUP BY book having count(book) > 1";
+			String query = "select book, count(book) as count from library.bookrent GROUP BY book having count(book) >= " + num;
 			rs = MySqlCon.stmt.executeQuery(query);
 			while(rs.next()){
 				list.add(new PopularBook(rs.getString(1), rs.getInt(2)));	

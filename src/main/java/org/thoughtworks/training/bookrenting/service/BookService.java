@@ -49,8 +49,8 @@ public class BookService {
 	 * Function: To check records for popular books
 	 * @return List of books
 	 */
-	public List<PopularBook> getPopularBooks(){
-		return bookRecords.getMostPoularBooks();
+	public List<PopularBook> getPopularBooks(int num){
+		return bookRecords.getMostPoularBooks(num);
 	}
 	
 	/**
